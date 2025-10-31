@@ -11,7 +11,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("EAC-C Student Management")
+        MainWindow.setObjectName("MainWindow")
         MainWindow.resize(655, 562)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(1)
@@ -167,8 +167,42 @@ class Ui_MainWindow(object):
         MainWindow.setPalette(palette)
         icon = QtGui.QIcon.fromTheme("x-office-document")
         MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet("QPushButton {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(190, 255, 220);\n"
+"}\n"
+"QWidget {\n"
+"    border-radius: 18px;\n"
+"}\n"
+"QFrame{\n"
+"    border-radius: 18px;\n"
+"}\n"
+"QLineEdit {\n"
+"    border: 1px solid #ccc;\n"
+"    border-radius: 5px;\n"
+"    background: white;\n"
+"    padding: 4px;\n"
+"}\n"
+"QLabel {\n"
+"    font: 600 20pt \"URW Bookman [UKWN]\";\n"
+"}\n"
+"QTableView {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QListView{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
-        self.centralwidget.setAutoFillBackground(True)
+        self.centralwidget.setAutoFillBackground(False)
+        self.centralwidget.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -180,47 +214,63 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
-        self.frame = QtWidgets.QFrame(parent=self.pageLogin)
-        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame.setObjectName("frame")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
+        self.widget = QtWidgets.QWidget(parent=self.pageLogin)
+        self.widget.setMaximumSize(QtCore.QSize(16777215, 180))
+        self.widget.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.widget.setObjectName("widget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName("verticalLayout")
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout.addItem(spacerItem1)
-        self.usernameLabel = QtWidgets.QLabel(parent=self.frame)
+        self.usernameLabel = QtWidgets.QLabel(parent=self.widget)
         font = QtGui.QFont()
+        font.setFamily("URW Bookman [urw]")
         font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
         self.usernameLabel.setFont(font)
+        self.usernameLabel.setStyleSheet("font: 300 12pt \"URW Bookman [urw]\";")
         self.usernameLabel.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.usernameLabel.setObjectName("usernameLabel")
         self.verticalLayout.addWidget(self.usernameLabel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.usernameInput = QtWidgets.QLineEdit(parent=self.frame)
+        self.usernameInput = QtWidgets.QLineEdit(parent=self.widget)
+        self.usernameInput.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.usernameInput.setObjectName("usernameInput")
         self.verticalLayout.addWidget(self.usernameInput, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.passwordLabel = QtWidgets.QLabel(parent=self.frame)
+        self.passwordLabel = QtWidgets.QLabel(parent=self.widget)
         font = QtGui.QFont()
+        font.setFamily("URW Bookman [urw]")
         font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
         self.passwordLabel.setFont(font)
+        self.passwordLabel.setStyleSheet("font: 300 12pt \"URW Bookman [urw]\";")
         self.passwordLabel.setObjectName("passwordLabel")
         self.verticalLayout.addWidget(self.passwordLabel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.passwordInput = QtWidgets.QLineEdit(parent=self.frame)
+        self.passwordInput = QtWidgets.QLineEdit(parent=self.widget)
+        self.passwordInput.setAutoFillBackground(False)
+        self.passwordInput.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.passwordInput.setObjectName("passwordInput")
         self.verticalLayout.addWidget(self.passwordInput, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.loginButton = QtWidgets.QPushButton(parent=self.frame)
+        self.loginButton = QtWidgets.QPushButton(parent=self.widget)
+        self.loginButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
+        self.loginButton.setDefault(True)
         self.loginButton.setObjectName("loginButton")
         self.verticalLayout.addWidget(self.loginButton, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignBottom)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout.addItem(spacerItem2)
-        self.horizontalLayout_2.addWidget(self.frame, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem3)
+        self.horizontalLayout_2.addWidget(self.widget)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
         self.stackedWidget.addWidget(self.pageLogin)
         self.pageMain = QtWidgets.QWidget()
         self.pageMain.setObjectName("pageMain")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.pageMain)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.navSpacer = QtWidgets.QFrame(parent=self.pageMain)
+        self.navSpacer = QtWidgets.QWidget(parent=self.pageMain)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(1)
@@ -228,8 +278,7 @@ class Ui_MainWindow(object):
         self.navSpacer.setSizePolicy(sizePolicy)
         self.navSpacer.setMinimumSize(QtCore.QSize(140, 0))
         self.navSpacer.setMaximumSize(QtCore.QSize(140, 16777215))
-        self.navSpacer.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.navSpacer.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.navSpacer.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.navSpacer.setObjectName("navSpacer")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.navSpacer)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -273,15 +322,17 @@ class Ui_MainWindow(object):
         self.line_5.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_5.setObjectName("line_5")
         self.verticalLayout_2.addWidget(self.line_5)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 267, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
-        self.horizontalLayout_3.addWidget(self.navSpacer, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 267, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem2)
+        self.horizontalLayout_3.addWidget(self.navSpacer)
         self.Main = QtWidgets.QStackedWidget(parent=self.pageMain)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(4)
         sizePolicy.setVerticalStretch(4)
         sizePolicy.setHeightForWidth(self.Main.sizePolicy().hasHeightForWidth())
         self.Main.setSizePolicy(sizePolicy)
+        self.Main.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"")
         self.Main.setObjectName("Main")
         self.pageDashboard = QtWidgets.QWidget()
         self.pageDashboard.setObjectName("pageDashboard")
@@ -294,7 +345,10 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.dashboardLabel.sizePolicy().hasHeightForWidth())
         self.dashboardLabel.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(22)
+        font.setFamily("URW Bookman [UKWN]")
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setItalic(False)
         self.dashboardLabel.setFont(font)
         self.dashboardLabel.setObjectName("dashboardLabel")
         self.verticalLayout_3.addWidget(self.dashboardLabel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -304,8 +358,11 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(4)
         sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
         self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setStyleSheet("")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.frame_2.setLineWidth(1)
+        self.frame_2.setMidLineWidth(0)
         self.frame_2.setObjectName("frame_2")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
@@ -315,10 +372,13 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(2)
         sizePolicy.setHeightForWidth(self.cardStudents.sizePolicy().hasHeightForWidth())
         self.cardStudents.setSizePolicy(sizePolicy)
+        self.cardStudents.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.cardStudents.setObjectName("cardStudents")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.cardStudents)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.studentList = QtWidgets.QListView(parent=self.cardStudents)
+        self.studentList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.studentList.setObjectName("studentList")
         self.horizontalLayout_10.addWidget(self.studentList)
         self.horizontalLayout_4.addWidget(self.cardStudents)
@@ -328,10 +388,13 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(2)
         sizePolicy.setHeightForWidth(self.cardCourses.sizePolicy().hasHeightForWidth())
         self.cardCourses.setSizePolicy(sizePolicy)
+        self.cardCourses.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.cardCourses.setObjectName("cardCourses")
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.cardCourses)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.courseList = QtWidgets.QListView(parent=self.cardCourses)
+        self.courseList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.courseList.setObjectName("courseList")
         self.horizontalLayout_11.addWidget(self.courseList)
         self.horizontalLayout_4.addWidget(self.cardCourses)
@@ -342,12 +405,15 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(2)
         sizePolicy.setHeightForWidth(self.cardRecent.sizePolicy().hasHeightForWidth())
         self.cardRecent.setSizePolicy(sizePolicy)
+        self.cardRecent.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.cardRecent.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.cardRecent.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.cardRecent.setObjectName("cardRecent")
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.cardRecent)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.recentList = QtWidgets.QListView(parent=self.cardRecent)
+        self.recentList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.recentList.setObjectName("recentList")
         self.horizontalLayout_12.addWidget(self.recentList)
         self.verticalLayout_3.addWidget(self.cardRecent)
@@ -357,50 +423,88 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.pageStudents)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.frame_3 = QtWidgets.QFrame(parent=self.pageStudents)
+        self.frame_3.setStyleSheet("")
         self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_3)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.addstudentButton = QtWidgets.QPushButton(parent=self.frame_3)
+        self.addstudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.addstudentButton.setObjectName("addstudentButton")
         self.horizontalLayout_5.addWidget(self.addstudentButton)
         self.editstudentButton = QtWidgets.QPushButton(parent=self.frame_3)
+        self.editstudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.editstudentButton.setObjectName("editstudentButton")
         self.horizontalLayout_5.addWidget(self.editstudentButton)
         self.enrollstudentButton = QtWidgets.QPushButton(parent=self.frame_3)
+        self.enrollstudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.enrollstudentButton.setObjectName("enrollstudentButton")
         self.horizontalLayout_5.addWidget(self.enrollstudentButton)
         self.deletestudentButton = QtWidgets.QPushButton(parent=self.frame_3)
+        self.deletestudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.deletestudentButton.setObjectName("deletestudentButton")
         self.horizontalLayout_5.addWidget(self.deletestudentButton)
         self.verticalLayout_4.addWidget(self.frame_3)
         self.frame_4 = QtWidgets.QFrame(parent=self.pageStudents)
+        self.frame_4.setStyleSheet("")
         self.frame_4.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_4.setObjectName("frame_4")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_4)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.searchstudentInput = QtWidgets.QLineEdit(parent=self.frame_4)
+        self.searchstudentInput.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.searchstudentInput.setObjectName("searchstudentInput")
         self.horizontalLayout_6.addWidget(self.searchstudentInput)
         self.searchstudentButton = QtWidgets.QPushButton(parent=self.frame_4)
+        self.searchstudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.searchstudentButton.setObjectName("searchstudentButton")
         self.horizontalLayout_6.addWidget(self.searchstudentButton)
         self.verticalLayout_4.addWidget(self.frame_4)
         self.frame_5 = QtWidgets.QFrame(parent=self.pageStudents)
+        self.frame_5.setStyleSheet("")
         self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_5.setObjectName("frame_5")
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_5)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.studentTabs = QtWidgets.QTabWidget(parent=self.frame_5)
+        self.studentTabs.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.studentTabs.setObjectName("studentTabs")
         self.studentlistTable = QtWidgets.QWidget()
         self.studentlistTable.setObjectName("studentlistTable")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.studentlistTable)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.studentTable_2 = QtWidgets.QTableView(parent=self.studentlistTable)
+        self.studentTable_2.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.studentTable_2.setObjectName("studentTable_2")
         self.horizontalLayout_8.addWidget(self.studentTable_2)
         self.studentTabs.addTab(self.studentlistTable, "")
@@ -409,9 +513,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.studentreportTable)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.studentreportList = QtWidgets.QListView(parent=self.studentreportTable)
+        self.studentreportList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.studentreportList.setObjectName("studentreportList")
         self.verticalLayout_6.addWidget(self.studentreportList)
         self.getstudentreportButton = QtWidgets.QPushButton(parent=self.studentreportTable)
+        self.getstudentreportButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.getstudentreportButton.setObjectName("getstudentreportButton")
         self.verticalLayout_6.addWidget(self.getstudentreportButton)
         self.studentTabs.addTab(self.studentreportTable, "")
@@ -423,47 +535,79 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.pageCourses)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.frame_6 = QtWidgets.QFrame(parent=self.pageCourses)
+        self.frame_6.setStyleSheet("")
         self.frame_6.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_6.setObjectName("frame_6")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_6)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.addcourseButton = QtWidgets.QPushButton(parent=self.frame_6)
+        self.addcourseButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.addcourseButton.setObjectName("addcourseButton")
         self.horizontalLayout_13.addWidget(self.addcourseButton)
         self.editcourseButton = QtWidgets.QPushButton(parent=self.frame_6)
+        self.editcourseButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.editcourseButton.setObjectName("editcourseButton")
         self.horizontalLayout_13.addWidget(self.editcourseButton)
         self.deletecourseButton = QtWidgets.QPushButton(parent=self.frame_6)
+        self.deletecourseButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.deletecourseButton.setObjectName("deletecourseButton")
         self.horizontalLayout_13.addWidget(self.deletecourseButton)
         self.verticalLayout_5.addWidget(self.frame_6)
         self.frame_7 = QtWidgets.QFrame(parent=self.pageCourses)
+        self.frame_7.setStyleSheet("")
         self.frame_7.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_7.setObjectName("frame_7")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_7)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
         self.searchcourseInput = QtWidgets.QLineEdit(parent=self.frame_7)
+        self.searchcourseInput.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.searchcourseInput.setObjectName("searchcourseInput")
         self.horizontalLayout_14.addWidget(self.searchcourseInput)
         self.searchcourseButton = QtWidgets.QPushButton(parent=self.frame_7)
+        self.searchcourseButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.searchcourseButton.setObjectName("searchcourseButton")
         self.horizontalLayout_14.addWidget(self.searchcourseButton)
         self.verticalLayout_5.addWidget(self.frame_7)
         self.frame_8 = QtWidgets.QFrame(parent=self.pageCourses)
+        self.frame_8.setStyleSheet("")
         self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_8.setObjectName("frame_8")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.frame_8)
         self.horizontalLayout_15.setObjectName("horizontalLayout_15")
         self.courseTab = QtWidgets.QTabWidget(parent=self.frame_8)
+        self.courseTab.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.courseTab.setObjectName("courseTab")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.tab)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.courseTable = QtWidgets.QTableView(parent=self.tab)
+        self.courseTable.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.courseTable.setObjectName("courseTable")
         self.horizontalLayout_9.addWidget(self.courseTable)
         self.courseTab.addTab(self.tab, "")
@@ -472,9 +616,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.tab_2)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.coursereportList = QtWidgets.QListView(parent=self.tab_2)
+        self.coursereportList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.coursereportList.setObjectName("coursereportList")
         self.verticalLayout_7.addWidget(self.coursereportList)
         self.getcoursereportButton = QtWidgets.QPushButton(parent=self.tab_2)
+        self.getcoursereportButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.getcoursereportButton.setObjectName("getcoursereportButton")
         self.verticalLayout_7.addWidget(self.getcoursereportButton)
         self.courseTab.addTab(self.tab_2, "")
@@ -491,6 +643,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(2)
         sizePolicy.setHeightForWidth(self.frame_9.sizePolicy().hasHeightForWidth())
         self.frame_9.setSizePolicy(sizePolicy)
+        self.frame_9.setStyleSheet("")
         self.frame_9.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_9.setObjectName("frame_9")
@@ -498,7 +651,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.label = QtWidgets.QLabel(parent=self.frame_9)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setFamily("URW Bookman [UKWN]")
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setItalic(False)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.verticalLayout_9.addWidget(self.label, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -508,6 +664,12 @@ class Ui_MainWindow(object):
         self.line_8.setObjectName("line_8")
         self.verticalLayout_9.addWidget(self.line_8)
         self.calcgradeButton = QtWidgets.QPushButton(parent=self.frame_9)
+        self.calcgradeButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.calcgradeButton.setObjectName("calcgradeButton")
         self.verticalLayout_9.addWidget(self.calcgradeButton)
         self.line_6 = QtWidgets.QFrame(parent=self.frame_9)
@@ -516,6 +678,12 @@ class Ui_MainWindow(object):
         self.line_6.setObjectName("line_6")
         self.verticalLayout_9.addWidget(self.line_6)
         self.addgradeButton = QtWidgets.QPushButton(parent=self.frame_9)
+        self.addgradeButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.addgradeButton.setObjectName("addgradeButton")
         self.verticalLayout_9.addWidget(self.addgradeButton)
         self.line_7 = QtWidgets.QFrame(parent=self.frame_9)
@@ -524,6 +692,12 @@ class Ui_MainWindow(object):
         self.line_7.setObjectName("line_7")
         self.verticalLayout_9.addWidget(self.line_7)
         self.rankButton = QtWidgets.QPushButton(parent=self.frame_9)
+        self.rankButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.rankButton.setObjectName("rankButton")
         self.verticalLayout_9.addWidget(self.rankButton)
         self.line_9 = QtWidgets.QFrame(parent=self.frame_9)
@@ -538,34 +712,58 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(4)
         sizePolicy.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
         self.frame_11.setSizePolicy(sizePolicy)
+        self.frame_11.setStyleSheet("")
         self.frame_11.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_11.setObjectName("frame_11")
         self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.frame_11)
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.frame_12 = QtWidgets.QFrame(parent=self.frame_11)
+        self.frame_12.setStyleSheet("background-color: rgb(254, 255, 185);")
         self.frame_12.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_12.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_12.setObjectName("frame_12")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_12)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.failingstudentList = QtWidgets.QListWidget(parent=self.frame_12)
+        self.failingstudentList.setStyleSheet("background-color: rgb(244, 255, 205);\n"
+"")
         self.failingstudentList.setObjectName("failingstudentList")
         self.verticalLayout_11.addWidget(self.failingstudentList)
         self.failinfstudentButton = QtWidgets.QPushButton(parent=self.frame_12)
+        self.failinfstudentButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.failinfstudentButton.setObjectName("failinfstudentButton")
         self.verticalLayout_11.addWidget(self.failinfstudentButton, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.horizontalLayout_16.addWidget(self.frame_12)
         self.frame_13 = QtWidgets.QFrame(parent=self.frame_11)
+        self.frame_13.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.frame_13.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_13.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_13.setObjectName("frame_13")
         self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.frame_13)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.goodbyelabel = QtWidgets.QLabel(parent=self.frame_13)
+        font = QtGui.QFont()
+        font.setFamily("URW Gothic [UKWN]")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        self.goodbyelabel.setFont(font)
+        self.goodbyelabel.setStyleSheet("font: 10pt \"URW Gothic [UKWN]\";")
         self.goodbyelabel.setObjectName("goodbyelabel")
         self.verticalLayout_10.addWidget(self.goodbyelabel, 0, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.logoutButton = QtWidgets.QPushButton(parent=self.frame_13)
+        self.logoutButton.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid #ccc;\n"
+"    color: black;\n"
+"    border-radius: 12px;\n"
+"    padding: 6px 12px;\n"
+"    font: 300 9pt \"URW Bookman [urw]\";")
         self.logoutButton.setObjectName("logoutButton")
         self.verticalLayout_10.addWidget(self.logoutButton)
         self.horizontalLayout_16.addWidget(self.frame_13)
@@ -580,9 +778,9 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
-        self.Main.setCurrentIndex(2)
-        self.studentTabs.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
+        self.Main.setCurrentIndex(1)
+        self.studentTabs.setCurrentIndex(1)
         self.courseTab.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

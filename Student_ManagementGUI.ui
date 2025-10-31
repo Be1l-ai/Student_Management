@@ -468,17 +468,56 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="x-office-document"/>
+   <iconset theme="x-office-document">
+    <normaloff>.</normaloff>.</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 8px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;
+}
+QPushButton:hover {
+	background-color: rgb(190, 255, 220);
+}
+QWidget {
+	border-radius: 18px;
+}
+QFrame{
+	border-radius: 18px;
+}
+QLineEdit {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background: white;
+	padding: 4px;
+}
+QLabel {
+	font: 600 20pt &quot;URW Bookman [UKWN]&quot;;
+}
+QTableView {
+	background-color: rgb(255, 255, 255);
+}
+QListView{
+	background-color: rgb(255, 255, 255);
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
-    <bool>true</bool>
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(244, 255, 205);
+</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pageLogin">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -495,34 +534,30 @@
           </property>
          </spacer>
         </item>
-        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-         <widget class="QFrame" name="frame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>180</height>
+           </size>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
             <widget class="QLabel" name="usernameLabel">
              <property name="font">
               <font>
+               <family>URW Bookman [urw]</family>
                <pointsize>12</pointsize>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 300 12pt &quot;URW Bookman [urw]&quot;;</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
@@ -533,14 +568,25 @@
             </widget>
            </item>
            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-            <widget class="QLineEdit" name="usernameInput"/>
+            <widget class="QLineEdit" name="usernameInput">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+             </property>
+            </widget>
            </item>
            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
             <widget class="QLabel" name="passwordLabel">
              <property name="font">
               <font>
+               <family>URW Bookman [urw]</family>
                <pointsize>12</pointsize>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 300 12pt &quot;URW Bookman [urw]&quot;;</string>
              </property>
              <property name="text">
               <string>Password</string>
@@ -548,27 +594,33 @@
             </widget>
            </item>
            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-            <widget class="QLineEdit" name="passwordInput"/>
-           </item>
-           <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-            <widget class="QPushButton" name="loginButton">
-             <property name="text">
-              <string>Submit</string>
+            <widget class="QLineEdit" name="passwordInput">
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(244, 255, 205);
+</string>
              </property>
             </widget>
            </item>
-           <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
+            <widget class="QPushButton" name="loginButton">
+             <property name="styleSheet">
+              <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
+             <property name="text">
+              <string>Submit</string>
              </property>
-            </spacer>
+             <property name="default">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -590,8 +642,8 @@
       </widget>
       <widget class="QWidget" name="pageMain">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item alignment="Qt::AlignHCenter">
-         <widget class="QFrame" name="navSpacer">
+        <item>
+         <widget class="QWidget" name="navSpacer" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>1</horstretch>
@@ -610,11 +662,8 @@
             <height>16777215</height>
            </size>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item alignment="Qt::AlignHCenter">
@@ -711,8 +760,12 @@
             <verstretch>4</verstretch>
            </sizepolicy>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+          </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="pageDashboard">
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -726,7 +779,10 @@
               </property>
               <property name="font">
                <font>
-                <pointsize>22</pointsize>
+                <family>URW Bookman [UKWN]</family>
+                <pointsize>20</pointsize>
+                <italic>false</italic>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
@@ -742,11 +798,20 @@
                 <verstretch>4</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="lineWidth">
+               <number>1</number>
+              </property>
+              <property name="midLineWidth">
+               <number>0</number>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
@@ -757,9 +822,17 @@
                    <verstretch>2</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(254, 255, 185);</string>
+                 </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_10">
                   <item>
-                   <widget class="QListView" name="studentList"/>
+                   <widget class="QListView" name="studentList">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -772,9 +845,17 @@
                    <verstretch>2</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(254, 255, 185);</string>
+                 </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_11">
                   <item>
-                   <widget class="QListView" name="courseList"/>
+                   <widget class="QListView" name="courseList">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -790,6 +871,9 @@
                 <verstretch>2</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(254, 255, 185);</string>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -798,7 +882,12 @@
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_12">
                <item>
-                <widget class="QListView" name="recentList"/>
+                <widget class="QListView" name="recentList">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -809,6 +898,9 @@
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
              <widget class="QFrame" name="frame_3">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -818,6 +910,14 @@
               <layout class="QHBoxLayout" name="horizontalLayout_5">
                <item>
                 <widget class="QPushButton" name="addstudentButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Add Student</string>
                  </property>
@@ -825,6 +925,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="editstudentButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Edit Student</string>
                  </property>
@@ -832,6 +940,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="enrollstudentButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Enroll Student</string>
                  </property>
@@ -839,6 +955,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="deletestudentButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Delete Student</string>
                  </property>
@@ -849,6 +973,9 @@
             </item>
             <item>
              <widget class="QFrame" name="frame_4">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -858,6 +985,10 @@
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
                 <widget class="QLineEdit" name="searchstudentInput">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                 </property>
                  <property name="text">
                   <string>eg. Gol d. Roger</string>
                  </property>
@@ -865,6 +996,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="searchstudentButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Search</string>
                  </property>
@@ -875,6 +1014,9 @@
             </item>
             <item>
              <widget class="QFrame" name="frame_5">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -884,8 +1026,11 @@
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
                 <widget class="QTabWidget" name="studentTabs">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(254, 255, 185);</string>
+                 </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="studentlistTable">
                   <attribute name="title">
@@ -893,7 +1038,12 @@
                   </attribute>
                   <layout class="QHBoxLayout" name="horizontalLayout_8">
                    <item>
-                    <widget class="QTableView" name="studentTable_2"/>
+                    <widget class="QTableView" name="studentTable_2">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
@@ -903,10 +1053,23 @@
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_6">
                    <item>
-                    <widget class="QListView" name="studentreportList"/>
+                    <widget class="QListView" name="studentreportList">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                     </property>
+                    </widget>
                    </item>
                    <item>
                     <widget class="QPushButton" name="getstudentreportButton">
+                     <property name="styleSheet">
+                      <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                     </property>
                      <property name="text">
                       <string>Get Student Report</string>
                      </property>
@@ -925,6 +1088,9 @@
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QFrame" name="frame_6">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -934,6 +1100,14 @@
               <layout class="QHBoxLayout" name="horizontalLayout_13">
                <item>
                 <widget class="QPushButton" name="addcourseButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Add Course</string>
                  </property>
@@ -941,6 +1115,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="editcourseButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Edit Course</string>
                  </property>
@@ -948,6 +1130,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="deletecourseButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Delete Course</string>
                  </property>
@@ -958,6 +1148,9 @@
             </item>
             <item>
              <widget class="QFrame" name="frame_7">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -967,6 +1160,10 @@
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
                 <widget class="QLineEdit" name="searchcourseInput">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                 </property>
                  <property name="text">
                   <string>eg. MATH101</string>
                  </property>
@@ -974,6 +1171,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="searchcourseButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Search</string>
                  </property>
@@ -984,6 +1189,9 @@
             </item>
             <item>
              <widget class="QFrame" name="frame_8">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -993,6 +1201,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
                 <widget class="QTabWidget" name="courseTab">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(254, 255, 185);</string>
+                 </property>
                  <property name="currentIndex">
                   <number>1</number>
                  </property>
@@ -1002,7 +1213,12 @@
                   </attribute>
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
                    <item>
-                    <widget class="QTableView" name="courseTable"/>
+                    <widget class="QTableView" name="courseTable">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
@@ -1012,10 +1228,23 @@
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_7">
                    <item>
-                    <widget class="QListView" name="coursereportList"/>
+                    <widget class="QListView" name="coursereportList">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                     </property>
+                    </widget>
                    </item>
                    <item>
                     <widget class="QPushButton" name="getcoursereportButton">
+                     <property name="styleSheet">
+                      <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                     </property>
                      <property name="text">
                       <string>Get Course Report</string>
                      </property>
@@ -1040,6 +1269,9 @@
                 <verstretch>2</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -1051,7 +1283,10 @@
                 <widget class="QLabel" name="label">
                  <property name="font">
                   <font>
-                   <pointsize>14</pointsize>
+                   <family>URW Bookman [UKWN]</family>
+                   <pointsize>20</pointsize>
+                   <italic>false</italic>
+                   <bold>true</bold>
                   </font>
                  </property>
                  <property name="text">
@@ -1068,6 +1303,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="calcgradeButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Calculate Grade</string>
                  </property>
@@ -1082,6 +1325,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="addgradeButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Add Student Grade</string>
                  </property>
@@ -1096,6 +1347,14 @@
                </item>
                <item>
                 <widget class="QPushButton" name="rankButton">
+                 <property name="styleSheet">
+                  <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Get Class Ranking</string>
                  </property>
@@ -1119,6 +1378,9 @@
                 <verstretch>4</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -1128,6 +1390,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_16">
                <item>
                 <widget class="QFrame" name="frame_12">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(254, 255, 185);</string>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -1136,10 +1401,23 @@
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_11">
                   <item>
-                   <widget class="QListWidget" name="failingstudentList"/>
+                   <widget class="QListWidget" name="failingstudentList">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(244, 255, 205);
+</string>
+                    </property>
+                   </widget>
                   </item>
                   <item alignment="Qt::AlignLeft">
                    <widget class="QPushButton" name="failinfstudentButton">
+                    <property name="styleSheet">
+                     <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                    </property>
                     <property name="text">
                      <string>Find Failing Student</string>
                     </property>
@@ -1150,6 +1428,9 @@
                </item>
                <item>
                 <widget class="QFrame" name="frame_13">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255);</string>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -1159,6 +1440,17 @@
                  <layout class="QVBoxLayout" name="verticalLayout_10">
                   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                    <widget class="QLabel" name="goodbyelabel">
+                    <property name="font">
+                     <font>
+                      <family>URW Gothic [UKWN]</family>
+                      <pointsize>10</pointsize>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font: 10pt &quot;URW Gothic [UKWN]&quot;;</string>
+                    </property>
                     <property name="text">
                      <string>Goodbye TT</string>
                     </property>
@@ -1166,6 +1458,14 @@
                   </item>
                   <item>
                    <widget class="QPushButton" name="logoutButton">
+                    <property name="styleSheet">
+                     <string notr="true">	background-color: rgb(255, 255, 255);
+	border: 1px solid #ccc;
+	color: black;
+	border-radius: 12px;
+	padding: 6px 12px;
+	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
+                    </property>
                     <property name="text">
                      <string>Log out</string>
                     </property>

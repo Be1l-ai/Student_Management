@@ -31,10 +31,9 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.frame_dialog)
         self.buttonBox = QtWidgets.QDialogButtonBox(parent=Dialog)
         self.buttonBox.setStyleSheet("    background-color: rgb(255, 255, 255);\n"
-"    border: 1px solid #ccc;\n"
 "    color: black;\n"
-"    border-radius: 12px;\n"
-"    padding: 6px 12px;\n"
+"    border: 1px solid #bbb;\n"
+"border-radius: 8px;\n"
 "    font: 300 9pt \"URW Bookman [urw]\";")
         self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)

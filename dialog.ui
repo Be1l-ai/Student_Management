@@ -14,7 +14,8 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="x-office-document"/>
+   <iconset theme="x-office-document">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(244, 255, 205);
@@ -40,10 +41,9 @@
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="styleSheet">
       <string notr="true">	background-color: rgb(255, 255, 255);
-	border: 1px solid #ccc;
 	color: black;
-	border-radius: 12px;
-	padding: 6px 12px;
+	border: 1px solid #bbb;
+border-radius: 8px;
 	font: 300 9pt &quot;URW Bookman [urw]&quot;;</string>
      </property>
      <property name="orientation">

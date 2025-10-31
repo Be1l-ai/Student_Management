@@ -201,13 +201,13 @@ class Ui_MainWindow(object):
 "}\n"
 "QMainWindow#MainWindow{\n"
 "background-color: rgba(244, 255, 205, 150);\n"
-"background-image: url(:/images/images-removebg-preview.png);\n"
+"background-image: url(assets/images-removebg-preview.png);\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setAutoFillBackground(False)
         self.centralwidget.setStyleSheet("QWidget#centralwidget{\n"
 "background-color: rgba(244, 255, 205, 150);\n"
-"background-image: url(:/images/images-removebg-preview.png);\n"
+"background-image: url(assets/images-removebg-preview.png);\n"
 "}")
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -890,13 +890,3 @@ class Ui_MainWindow(object):
         self.addgradeButton.setText(_translate("MainWindow", "Add Student Grade"))
         self.rankButton.setText(_translate("MainWindow", "Get Class Ranking"))
         self.failinfstudentButton.setText(_translate("MainWindow", "Find Failing Student"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())

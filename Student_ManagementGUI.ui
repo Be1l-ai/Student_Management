@@ -506,7 +506,7 @@ QListView{
 }
 QMainWindow#MainWindow{
 background-color: rgba(244, 255, 205, 150);
-background-image: url(:/images/images-removebg-preview.png);
+background-image: url(assets/images-removebg-preview.png);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -516,7 +516,7 @@ background-image: url(:/images/images-removebg-preview.png);
    <property name="styleSheet">
     <string notr="true">QWidget#centralwidget{
 background-color: rgba(244, 255, 205, 150);
-background-image: url(:/images/images-removebg-preview.png);
+background-image: url(assets/images-removebg-preview.png);
 }</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">

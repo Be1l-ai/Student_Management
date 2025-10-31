@@ -1,22 +1,24 @@
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 
 class DisplayManager:
+    # handles displaying data in lists and tables
     @staticmethod
     def display_list(data, list_object, action=0):
+        # action: 0=recent, 1=students, 2=courses
         model = QStandardItemModel()
-        if action == 1:
+        if action == 1:  # students
             for student_id, info in data.items():
                 course_count = len(info.get("courses", []))
                 courses_text = f'{course_count} course(s)' if course_count > 0 else "No courses"
                 text_student = f"{student_id}: {info['name']} | {courses_text}"
                 item = QStandardItem(text_student)
                 model.appendRow(item)
-        elif action == 2:
+        elif action == 2:  # courses
             for course_code, info in data.items():
-                text_course = f'{course_code}: {info["subject"]}'
+                text_course = f"{course_code}: {info['subject']}"
                 item = QStandardItem(text_course)
                 model.appendRow(item)
-        else:
+        else:  # recent actions
             for history in data:
                 item = QStandardItem(str(history))
                 model.appendRow(item)

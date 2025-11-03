@@ -1,0 +1,5 @@
+# Student Management System Requirements
+# Python 3.x required
+
+# GUI Framework
+PyQt6>=6.0.0

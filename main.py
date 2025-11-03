@@ -726,10 +726,3 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = StudentManagement()
     sys.exit(app.exec())
-
-#Not to glaze myself sir but my code is so good ai detector keep flagging
-#my work kahit na i spend hours refactoring plus static methods (para iwas repetition po)
-#and improving the code structure. Just to be clear sir, i use ai of course but
-#not everything here is ai generated. hehe promise
-
-#sqlite pa sana sir kaso kulang sa oras po (o.o)

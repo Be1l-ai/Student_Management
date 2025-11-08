@@ -1,20 +1,23 @@
 from utils.student_management import Ui_MainWindow
 from utils.dialog_helper import DialogHelper
 from utils.displaymanager import DisplayManager
-from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication, QMessageBox
-from PyQt6.QtCore import Qt
+from utils.validators import Validator
+from utils.reports import ReportGenerator
+from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox
 import sys
-import random
 
 class StudentManagement(QMainWindow):
+    """Main window for Student Management System."""
 
     def __init__(self):
+        """Initialize the app with default values and UI."""
         super().__init__()
 
         self.auth = {'username':'admin', 'password':'admin123'}
         self.students = {}
         self.courses = {}
         self.recent_actions = []
+        
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentIndex(0)
@@ -23,10 +26,13 @@ class StudentManagement(QMainWindow):
         self.show()
 
     def gui_setup(self):
-        # all buttons and their functions connection
+        """Connect UI buttons to their handlers."""
+        # Navigation
         self.ui.loginButton.clicked.connect(self.login)
         self.ui.dashboardButton.clicked.connect(self.dashboard_main)
         self.ui.studentsButton.clicked.connect(self.page_students)
+        
+        # Student operations
         self.ui.addstudentButton.clicked.connect(self.add_student)
         self.ui.editstudentButton.clicked.connect(self.edit_student)
         self.ui.enrollstudentButton.clicked.connect(self.enroll_student)
@@ -34,6 +40,7 @@ class StudentManagement(QMainWindow):
         self.ui.searchstudentButton.clicked.connect(self.search_student)
         self.ui.getstudentreportButton.clicked.connect(self.get_student_report)
 
+        # Course operations
         self.ui.coursesButton.clicked.connect(self.page_courses)
         self.ui.addcourseButton.clicked.connect(self.add_course)
         self.ui.editcourseButton.clicked.connect(self.edit_course)
@@ -41,6 +48,7 @@ class StudentManagement(QMainWindow):
         self.ui.searchcourseButton.clicked.connect(self.search_course)
         self.ui.getcoursereportButton.clicked.connect(self.get_course_report)
 
+        # Tools
         self.ui.moreButoon.clicked.connect(self.more)
         self.ui.calcgradeButton.clicked.connect(self.calculate_grade_tool)
         self.ui.addgradeButton.clicked.connect(self.add_student_grade)
@@ -48,10 +56,10 @@ class StudentManagement(QMainWindow):
         self.ui.failinfstudentButton.clicked.connect(self.find_failing_students)
         self.ui.logoutButton.clicked.connect(self.logout)
 
-    def login(self): #zero security login
+    def login(self):
+        """Handle login with basic authentication."""
         username = self.ui.usernameInput.text()
         password = self.ui.passwordInput.text()
-
 
         if username == self.auth['username']:
             if password == self.auth['password']:
@@ -63,74 +71,29 @@ class StudentManagement(QMainWindow):
             QMessageBox.warning(self, 'error', "Wrong Username")
 
     def dashboard_main(self):
+        """Go to dashboard page."""
         self.ui.Main.setCurrentWidget(self.ui.pageDashboard)
 
     def page_students(self):
+        """Go to students page and refresh table."""
         self.ui.Main.setCurrentWidget(self.ui.pageStudents)
         self.display_student_table()
 
     def page_courses(self):
+        """Go to courses page and refresh table."""
         self.ui.Main.setCurrentWidget(self.ui.pageCourses)
         self.display_course_table()
 
     def more(self):
+        """Go to tools page."""
         self.ui.Main.setCurrentWidget(self.ui.pageMore)
 
-    def generate_id(self):
-        return random.randint(10**4, (10**5)-1)
-
-    def check_has_students(self):
-        if not self.students:
-            QMessageBox.warning(self, 'Error', "No students available")
-            return False
-        return True
-    
-    def check_has_courses(self):
-        if not self.courses:
-            QMessageBox.warning(self, 'Error', "No courses available")
-            return False
-        return True
-    
-    def validate_student_id(self, student_id_str):
-        try:
-            student_id = int(student_id_str)
-            if student_id not in self.students:
-                QMessageBox.warning(self, "Error", f'Student ID {student_id} not found')
-                return None
-            return student_id
-        except ValueError:
-            QMessageBox.warning(self, 'Error', "Invalid Student ID format")
-            return None
-    
-    def validate_course_code(self, course_code):
-        if course_code not in self.courses:
-            QMessageBox.warning(self, "Error", f'Course {course_code} not found')
-            return False
-        return True
-    
-    def validate_grades(self, grades_dict):
-        try:
-            grade_values = {field: float(value) for field, value in grades_dict.items()}
-            values = grade_values
-            if not all(0 <= grade <= 100 for grade in values.values()):
-                QMessageBox.warning(self, 'Error', "All grades must be between 0 and 100")
-                return None
-            return values
-        except ValueError:
-            QMessageBox.warning(self, "Error", 'Please enter valid numeric values')
-            return None
-    
-    def find_student_course(self, student_id, course_code):
-        student_courses = self.students[student_id].get("courses", [])
-        for course in student_courses:
-            if course["code"] == course_code:
-                return course
-        return None
 
     def add_student(self):
+        """Add new student with auto-generated ID."""
         new_student = DialogHelper.get_user_input(self, ['Name'], title="Add Student")
         if new_student:
-            self.students[self.generate_id()] = {
+            self.students[Validator.generate_id()] = {
                 'name': new_student['Name'],
                 'courses': []
             }
@@ -140,10 +103,11 @@ class StudentManagement(QMainWindow):
             self.display_student_table()
 
     def display_student_list(self):
+        """Update student list widget."""
         DisplayManager.display_list(self.students, self.ui.studentList, action=1)
 
-
-    def add_course(self): #refactor all dialogpopups
+    def add_course(self):
+        """Add new course, checks for duplicates."""
         new_course = DialogHelper.get_user_input(self, ['Course Code', "Subject"], title="Add Course")
         if new_course:
             course_code = new_course['Course Code'].strip()
@@ -164,14 +128,15 @@ class StudentManagement(QMainWindow):
             self.display_course_table()
 
     def edit_student(self):
-        if not self.check_has_students():
+        """Edit student name by ID."""
+        if not Validator.check_has_students(self, self.students):
             return
         
         input_data = DialogHelper.get_required_input(self, ['Student ID'], title="Edit Student")
         if not input_data:
             return
         
-        student_id = self.validate_student_id(input_data['Student ID'].strip())
+        student_id = Validator.validate_student_id(self, input_data['Student ID'].strip(), self.students)
         if student_id is None:
             return
         
@@ -187,14 +152,15 @@ class StudentManagement(QMainWindow):
         self.display_student_table()
 
     def delete_student(self):
-        if not self.check_has_students():
+        """Delete student after confirmation."""
+        if not Validator.check_has_students(self, self.students):
             return
         
         input_data = DialogHelper.get_required_input(self, ['Student ID'], title="Delete Student")
         if not input_data:
             return
         
-        student_id = self.validate_student_id(input_data['Student ID'].strip())
+        student_id = Validator.validate_student_id(self, input_data['Student ID'].strip(), self.students)
         if student_id is None:
             return
         
@@ -206,7 +172,6 @@ class StudentManagement(QMainWindow):
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
-
         if reply == QMessageBox.StandardButton.Yes:
             del self.students[student_id]
             QMessageBox.information(self, "Success", f'Deleted student {student_name}')
@@ -215,7 +180,8 @@ class StudentManagement(QMainWindow):
             self.display_student_table()
 
     def edit_course(self):
-        if not self.check_has_courses():
+        """Edit course subject by code."""
+        if not Validator.check_has_courses(self, self.courses):
             return
         
         input_data = DialogHelper.get_required_input(self, ['Course Code'], title="Edit Course")
@@ -224,7 +190,7 @@ class StudentManagement(QMainWindow):
         
         course_code = input_data['Course Code'].strip()
 
-        if not self.validate_course_code(course_code):
+        if not Validator.validate_course_code(self, course_code, self.courses):
             return
         
         current_subject = self.courses[course_code]['subject']
@@ -239,17 +205,16 @@ class StudentManagement(QMainWindow):
         self.display_course_table()
 
     def delete_course(self):
-        if not self.check_has_courses():
+        """Delete course after confirmation."""
+        if not Validator.check_has_courses(self, self.courses):
             return
         
         input_data = DialogHelper.get_required_input(self, ['Course Code'], title="Delete Course")
         if not input_data:
             return
         
-        
         course_code = input_data['Course Code'].strip()
-        if not self.validate_course_code(course_code):
-
+        if not Validator.validate_course_code(self, course_code, self.courses):
             return
         
         course_subject = self.courses[course_code]['subject']
@@ -265,49 +230,52 @@ class StudentManagement(QMainWindow):
             QMessageBox.information(self, 'Success', f'Deleted course {course_code}')
             self.add_recent_action(f"Deleted course: {course_code}")
             self.display_course_list()
-
             self.display_course_table()
 
     def display_course_list(self):
+        """Update course list widget."""
         DisplayManager.display_list(self.courses, self.ui.courseList, action=2)
 
     def add_recent_action(self, action):
+        """Add action to recent list, keep last 10."""
         self.recent_actions.insert(0, action)
         if len(self.recent_actions) > 10:
             self.recent_actions = self.recent_actions[:10]
         self.display_recent_list()
 
-
     def display_recent_list(self):
+        """Update recent actions list."""
         DisplayManager.display_list(self.recent_actions, self.ui.recentList, action=0)
 
     def display_student_table(self):
+        """Update student table."""
         DisplayManager.display_table(self.students, self.ui.studentTable_2, action=1)
 
     def display_course_table(self):
+        """Update course table."""
         DisplayManager.display_table(self.courses, self.ui.courseTable, action=2)
                         
     def enroll_student(self):
-        if not self.check_has_students():
+        """Enroll student in a course with empty grades."""
+        if not Validator.check_has_students(self, self.students):
             return
-        if not self.check_has_courses():
+        if not Validator.check_has_courses(self, self.courses):
             return
         
         input_data = DialogHelper.get_user_input(self, ['Student ID'], title="Enroll Student")
         if not input_data:
             return
         
-        student_id = self.validate_student_id(input_data['Student ID'].strip())
+        student_id = Validator.validate_student_id(self, input_data['Student ID'].strip(), self.students)
         if student_id is None:
             return
         
-
         course_data = DialogHelper.get_user_input(self, ['Course Code'], title="Enroll in Course")
         if not course_data:
             return
         
         course_code = course_data['Course Code'].strip()
-        if not self.validate_course_code(course_code):
+        if not Validator.validate_course_code(self, course_code, self.courses):
             return
         
         student_courses = self.students[student_id].get('courses', [])
@@ -315,22 +283,15 @@ class StudentManagement(QMainWindow):
             QMessageBox.warning(self, "Error", f'Student already enrolled in {course_code}')
             return
         
-
         new_course = {
             'code': course_code,
             'subject': self.courses[course_code]['subject'],
-            'grades': {
-                'seatwork': 0,
-                'assignment': 0,
-                'quizzes': 0,
-                'exam': 0
-            },
+            'grades': {'seatwork': 0, 'assignment': 0, 'quizzes': 0, 'exam': 0},
             'remarks': ''
         }
         self.students[student_id]['courses'].append(new_course)
         
         student_name = self.students[student_id]['name']
-
         QMessageBox.information(
            self, 'Success', 
            f"Enrolled {student_name} in {self.courses[course_code]['subject']}"
@@ -340,11 +301,11 @@ class StudentManagement(QMainWindow):
         self.display_student_table()
 
     def search_student(self):
+        """Search students by ID or name."""
         search_text = self.ui.searchstudentInput.text().strip()
         
         if not search_text:
             QMessageBox.warning(self, 'Error', "Please enter search text")
-
             return
         
         if not self.students:
@@ -355,7 +316,6 @@ class StudentManagement(QMainWindow):
         
         try:
             search_id = int(search_text)
-
             if search_id in self.students:
                 results.append((search_id, self.students[search_id]))
         except ValueError:
@@ -373,6 +333,7 @@ class StudentManagement(QMainWindow):
             self.display_student_table() 
 
     def search_course(self):
+        """Search courses by code or subject."""
         search_text = self.ui.searchcourseInput.text().strip()
         
         if not search_text:
@@ -396,70 +357,30 @@ class StudentManagement(QMainWindow):
             QMessageBox.information(self, 'Search Results', f"Found {len(results)} course(s)")
         else:
             QMessageBox.information(self, "Search Results", 'No courses found')
-            self.display_course_table()  # reset to show all
-
-    def calculate_grade(self, seatwork, assignment, quizzes, exam):
-        class_standing = (seatwork * 0.25) + (assignment * 0.25) + (quizzes * 0.50)
-        final_grade = (class_standing * 0.40) + (exam * 0.60)
-        remarks = 'PASSED' if final_grade >= 75 else 'FAILED'
-        
-        return round(final_grade, 2), remarks
+            self.display_course_table()
 
     def get_student_report(self):
-        if not self.check_has_students():
+        """Generate full report for a student with all courses and grades."""
+        if not Validator.check_has_students(self, self.students):
             return
         
         input_data = DialogHelper.get_user_input(self, ['Student ID'], title="Student Report")
         if not input_data:
             return
         
-        student_id = self.validate_student_id(input_data["Student ID"].strip())
+        student_id = Validator.validate_student_id(self, input_data["Student ID"].strip(), self.students)
         if student_id is None:
             return
         
         student = self.students[student_id]
-        
-        report = [
-            f"=== STUDENT REPORT ===",
-            f"Student ID: {student_id}",
-            f"Name: {student['name']}",
-            f"",
-        ]
-        
-        student_courses = student.get("courses", [])
-        
-        if not student_courses:
-            report.append("No courses enrolled")
-        else:
-            report.append(f"=== ENROLLED COURSES ({len(student_courses)}) ===")
-            report.append("")
-            
-            for idx, course in enumerate(student_courses, 1):
-                seatwork = course["grades"]["seatwork"]
-                assignment = course["grades"]["assignment"]
-                quizzes = course["grades"]["quizzes"]
-                exam = course["grades"]["exam"]
-                final_grade, remarks = self.calculate_grade(seatwork, assignment, quizzes, exam)
-                course["remarks"] = remarks
-                class_standing = round((seatwork * 0.25 + assignment * 0.25 + quizzes * 0.50), 2)
-                
-                report.extend([
-                    f"--- COURSE {idx}: {course['code']} - {course['subject']} ---",
-                    f"Seatwork: {seatwork}",
-                    f"Assignment: {assignment}",
-                    f"Quizzes: {quizzes}",
-                    f"Class Standing: {class_standing}",
-                    f"Exam: {exam}",
-                    f"FINAL GRADE: {final_grade}",
-                    f"REMARKS: {remarks}",
-                    f""
-                ])
+        report = ReportGenerator.build_student_report(student_id, student, self.students)
         
         DisplayManager.display_list(report, self.ui.studentreportList, action=0)
         self.add_recent_action(f"Generated report for {student['name']}")
 
     def get_course_report(self):
-        if not self.check_has_courses():
+        """Generate report for a course showing all enrolled students."""
+        if not Validator.check_has_courses(self, self.courses):
             return
         
         input_data = DialogHelper.get_user_input(self, ["Course Code"], title="Course Report")
@@ -467,78 +388,49 @@ class StudentManagement(QMainWindow):
             return
         
         course_code = input_data["Course Code"].strip()
-        if not self.validate_course_code(course_code):
+        if not Validator.validate_course_code(self, course_code, self.courses):
             return
         
         course = self.courses[course_code]
-        
-        enrolled_students = []
-        for student_id, student_info in self.students.items():
-            for student_course in student_info.get("courses", []):
-                if student_course["code"] == course_code:
-                    enrolled_students.append({
-                        "id": student_id,
-                        "name": student_info["name"]
-                    })
-                    break
-        
-        report = [
-            f"=== COURSE REPORT ===",
-            f"Course Code: {course_code}",
-            f"Subject: {course['subject']}",
-            f"",
-            f"=== ENROLLED STUDENTS ({len(enrolled_students)}) ===",
-        ]
-        
-        if enrolled_students:
-            for student in enrolled_students:
-                report.append(f"ID: {student['id']} - {student['name']}")
-        else:
-            report.append("No students enrolled")
+        report = ReportGenerator.build_course_report(course_code, course, self.students)
         
         DisplayManager.display_list(report, self.ui.coursereportList, action=0)
         self.add_recent_action(f"Generated report for {course_code}")
 
     def calculate_grade_tool(self):
-        grades_input = DialogHelper.get_user_input(self, ['Seatwork (0-100)', "Assignment (0-100)", 'Quizzes (0-100)', "Exam (0-100)"], title="Calculate Grade Tool")
+        """Grade calculator tool without affecting student records."""
+        grades_input = DialogHelper.get_user_input(
+            self, 
+            ['Seatwork (0-100)', "Assignment (0-100)", 'Quizzes (0-100)', "Exam (0-100)"], 
+            title="Calculate Grade Tool"
+        )
         if not grades_input:
             return
         
-        grades = self.validate_grades(grades_input)
+        grades = Validator.validate_grades(self, grades_input)
         if grades is None:
             return
         
-        seatwork = grades['Seatwork (0-100)']
-        assignment = grades["Assignment (0-100)"]
-        quizzes = grades['Quizzes (0-100)']
-        exam = grades["Exam (0-100)"]
-        
-        final_grade, remarks = self.calculate_grade(seatwork, assignment, quizzes, exam)
-        class_standing = round((seatwork * 0.25 + assignment * 0.25 + quizzes * 0.50), 2) #refactor all calculation to differnet class
-        
-        result_message = (
-            f'=== GRADE CALCULATION ===\n\n'
-            f"Seatwork: {seatwork}\n"
-            f'Assignment: {assignment}\n'
-            f"Quizzes: {quizzes}\n"
-            f'Class Standing (40%): {class_standing}\n\n'
-            f"Exam (60%): {exam}\n\n"
-            f'FINAL GRADE: {final_grade}\n'
-            f"REMARKS: {remarks}"
+        result_message, final_grade, remarks = ReportGenerator.format_grade_calculation(
+            grades['Seatwork (0-100)'],
+            grades["Assignment (0-100)"],
+            grades['Quizzes (0-100)'],
+            grades["Exam (0-100)"]
         )
         
         QMessageBox.information(self, 'Grade Calculation Result', result_message)
         self.add_recent_action("Calculated grade using tool")
 
     def add_student_grade(self):
-        if not self.check_has_students():
+        """Add or update grades for a student in a course."""
+        if not Validator.check_has_students(self, self.students):
             return
         
         input_data = DialogHelper.get_user_input(self, ['Student ID'], title="Add Student Grade")
         if not input_data:
             return
         
-        student_id = self.validate_student_id(input_data["Student ID"].strip())
+        student_id = Validator.validate_student_id(self, input_data["Student ID"].strip(), self.students)
         if student_id is None:
             return
 
@@ -554,8 +446,7 @@ class StudentManagement(QMainWindow):
             return
         
         course_code = course_data["Course Code"].strip()
-
-        target_course = self.find_student_course(student_id, course_code)
+        target_course = Validator.find_student_course(self.students, student_id, course_code)
         
         if not target_course:
             QMessageBox.warning(self, "Error", f"Student not enrolled in {course_code}")
@@ -567,10 +458,9 @@ class StudentManagement(QMainWindow):
             title="Add Student Grade"
         )
         if not grades_input:
-
             return
         
-        grades = self.validate_grades(grades_input)
+        grades = Validator.validate_grades(self, grades_input)
         if grades is None:
             return
         
@@ -579,12 +469,11 @@ class StudentManagement(QMainWindow):
         target_course["grades"]["quizzes"] = grades["Quizzes (0-100)"]
         target_course["grades"]["exam"] = grades["Exam (0-100)"]
         
-        final_grade, remarks = self.calculate_grade(
+        final_grade, remarks = Validator.calculate_grade(
             grades["Seatwork (0-100)"], 
             grades["Assignment (0-100)"], 
             grades["Quizzes (0-100)"], 
             grades["Exam (0-100)"]
-
         )
         target_course["remarks"] = remarks
         
@@ -597,44 +486,16 @@ class StudentManagement(QMainWindow):
         self.add_recent_action(f"Updated grades: {student['name']} - {course_code}")
 
     def get_class_ranking(self):
-        if not self.check_has_students():
+        """Generate ranking of all students by average grade."""
+        if not Validator.check_has_students(self, self.students):
             return
         
-        student_averages = []
-        for student_id, student_info in self.students.items():
-            courses_list = student_info.get("courses", [])
-            
-            if not courses_list:
-                continue
-            
-
-            total_grade = 0
-            course_count = 0
-            for course in courses_list:
-                grades = course["grades"]
-                final_grade, _ = self.calculate_grade(
-                    grades["seatwork"],
-                    grades["assignment"],
-                    grades["quizzes"],
-                    grades["exam"]
-                )
-                total_grade += final_grade
-                course_count += 1
-            
-            if course_count > 0:
-                average_grade = round(total_grade / course_count, 2)
-                student_averages.append({
-                    "id": student_id,
-                    "name": student_info["name"],
-                    "average": average_grade,
-                    "courses": course_count
-                })
+        student_averages = ReportGenerator.calculate_class_ranking(self.students)
         
         if not student_averages:
             QMessageBox.information(self, "Class Ranking", "No students with grades to rank")
             return
         
-        student_averages.sort(key=lambda x: x["average"], reverse=True) #lambda to map element to value
         self.ui.failingstudentList.clear()
         
         for rank, student in enumerate(student_averages, 1):
@@ -648,42 +509,16 @@ class StudentManagement(QMainWindow):
         )
         self.add_recent_action("Generated class ranking")
 
-
     def find_failing_students(self):
-        if not self.check_has_students(): #validation
+        """Find all students with grades below 75%."""
+        if not Validator.check_has_students(self, self.students):
             return
         
-        failing_students = []
-        
-        for student_id, student_info in self.students.items():
-            courses_list = student_info.get("courses", [])
-            
-            if not courses_list:
-                continue
-            
-            for course in courses_list:
-                grades = course["grades"]
-                final_grade, remarks = self.calculate_grade(
-                    grades["seatwork"],
-                    grades["assignment"],
-                    grades["quizzes"],
-                    grades["exam"]
-                )
-                
-
-                if final_grade < 75:
-                    failing_students.append({
-                        "id": student_id,
-                        "name": student_info["name"],
-                        "course": course["code"],
-                        "subject": course["subject"],
-                        "grade": final_grade
-                    })
+        failing_students = ReportGenerator.find_failing_grades(self.students)
         
         if not failing_students:
             QMessageBox.information(self, "Failing Students", "No failing students found!")
             self.ui.failingstudentList.clear()
-
             self.ui.failingstudentList.addItem("No failing students")
             return
         
@@ -697,7 +532,6 @@ class StudentManagement(QMainWindow):
             )
             self.ui.failingstudentList.addItem(fail_text)
         
-
         QMessageBox.warning(
             self, 
             "Failing Students", 
@@ -705,8 +539,8 @@ class StudentManagement(QMainWindow):
         )
         self.add_recent_action("Found failing students")
 
-
-    def logout(self): #logout function
+    def logout(self):
+        """Log out and return to login screen."""
         reply = QMessageBox.question(
             self,
             'Logout',
@@ -716,11 +550,10 @@ class StudentManagement(QMainWindow):
         
         if reply == QMessageBox.StandardButton.Yes:
             self.ui.usernameInput.clear()
-
             self.ui.passwordInput.clear()
-            
             self.ui.stackedWidget.setCurrentWidget(self.ui.pageLogin)
             QMessageBox.information(self, 'Logged Out', "Successfully logged out")
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
